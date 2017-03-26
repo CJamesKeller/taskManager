@@ -8,19 +8,22 @@
     <script src="scripts/client.js" charset="utf-8"></script>
   </head>
   <body>
-    <h1>TASK LIST</h1>
-    <button type="button" name="button">Create</button>
+    <h1 id="header">TASK LIST</h1>
+    <form id="newForm">
+      <input type="text" id="newTask">
+    </form>
+    <button type="submit" name="button">Create</button>
     <div id="tasksDiv">
       <table>
         <thead id="tableHead">
           <tr>
-            <td>TASK</td>
+            <th>TASK</th>
           </tr>
           <tr>
-            <td>STATUS</td>
+            <th>STATUS</th>
           </tr>
           <tr>
-            <td>DELETE</td>
+            <th>DELETE</th>
           </tr>
         </thead>
         <tbody id="tableBody">
