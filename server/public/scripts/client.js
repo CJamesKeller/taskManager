@@ -24,8 +24,11 @@ $(document).ready(function()
   $("#tasksDiv").on("click", ".delete", function()
   {
     whichTask = $(this).parent().parent().data("task");
-    console.log(whichTask);
-    deleteTask();
+    feelingSure = confirm("Are you sure?");
+    if(feelingSure)
+    {
+      deleteTask();
+    }
   });
 
   $("#tasksDiv").on("click", ".done", function()
