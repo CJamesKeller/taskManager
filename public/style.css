@@ -1,0 +1,10 @@
+#tableHead
+{
+  font-weight: bold;
+}
+
+.completed
+{
+  background-color: lightgrey;
+  color: darkgrey;
+}
