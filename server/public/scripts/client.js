@@ -1,4 +1,3 @@
-var editing = false;
 var whichTask;
 
 $(document).ready(function()
@@ -9,49 +8,41 @@ $(document).ready(function()
   {
     event.preventDefault();
     var newTask = $("#newTask").val();
-    if(editing)
-    {
-      editing = false;
-      $("#header").text("Add new entry");
-      $.ajax(
-        {
-          type: "PUT",
-          url: "tasks/edit/",
-          data: {newTask: newTask},
-          success: function(res)
-          {
-            getBooks();
-            $("#newTask").val("");
-          }
-        });
-      }
-      else
-      {
         $.ajax(
           {
             type: "POST",
             url: "tasks/add",
-            data: {newTask: newTask},
+            data: {name: newTask, status: true},
             success: function(res)
             {
-              getBooks();
+              getTasks();
               $("#newTask").val("");
             }
           });
-      }
     });
 
   $("#tasksDiv").on("click", ".delete", function()
   {
-    whichTask = $(this).data("name");
+    whichTask = $(this).parent().parent().data("task");
+    console.log(whichTask);
     deleteTask();
   });
 
-  $("#tasksDiv").on("click", ".edit", function()
+  $("#tasksDiv").on("click", ".done", function()
   {
-    whichTask = $(this).data("name");
-    editing = true;
-    $("#header").text("Make your edits to:" + whichTask);
+    whichTask = $(this).parent().parent().data("task");
+    taskStatus = false;
+    $.ajax(
+      {
+        type: "PUT",
+        url: "tasks/done/",
+        data: {id: whichTask, status: taskStatus},
+        success: function(res)
+        {
+          getTasks();
+          $("#newTask").val("");
+        }
+      });
   });
 
 //end of DocReady
@@ -67,20 +58,20 @@ function getTasks()
       data: whichTask,
       success: function(res)
       {
-        console.log(res);
         $("#tasksDiv").empty();
         for(var i = 0; i < res.length; i++)
         {
           var task = res[i];
-          $("#tasksDiv").append("<tr>");
+          $("#tasksDiv").append("<tr class=" + task.status + " data-task=" + task.id + ">");
           var $el = $("#tasksDiv").children().last();
           $el.append("<td>" + task.id + "</td>");
+          $el.append("<td>" + task.name + "</td>");
           $el.append("<td><button class='delete' data-task='" +
                       task.id +
                     "'>Delete</button></td>");
-          $el.append("<td><button class='edit' data-task='" +
+          $el.append("<td><button class='done' data-task='" +
                       task.id +
-                    "'>Edit</button></td>");
+                    "'>Done</button></td>");
 
         }
       }
@@ -93,7 +84,6 @@ function deleteTask()
     {
       type: "DELETE",
       url: "tasks/delete/" + whichTask,
-      data: whichTask,
       success: function(res)
       {
         getTasks();

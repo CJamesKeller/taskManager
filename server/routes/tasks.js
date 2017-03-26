@@ -43,7 +43,8 @@ router.get("/", function(req, res)
 
 router.post("/add", function(req, res)
 {
-  var task = req.body.name;
+  var taskName = req.body.name;
+  var taskStatus = req.body.status;
   pool.connect(function(error, database, done)
   {
     if(error)
@@ -53,8 +54,8 @@ router.post("/add", function(req, res)
     }
     else
     {
-      database.query(' INSERT INTO "tasks" ("name") VALUES ($1); ',
-      [task], function(queryError, result)
+      database.query(' INSERT INTO "tasks" ("name", "status") VALUES ($1, $2); ',
+      [taskName, taskStatus], function(queryError, result)
       {
         done();
         if(queryError)
@@ -99,10 +100,9 @@ router.delete("/delete/:id", function(req, res)
   });
 });
 
-router.put("/edit/", function(req, res)
+router.put("/done/", function(req, res)
 {
   var taskID = req.body.id;
-  var taskName = req.body.name;
   pool.connect(function(error, database, done)
   {
     if(error)
@@ -112,8 +112,8 @@ router.put("/edit/", function(req, res)
     }
     else
     {
-      database.query('UPDATE "tasks" SET "task" = $2, WHERE "id" = $1;',
-      [taskID, taskName], function(queryError, result)
+      database.query('UPDATE "tasks" SET "status" = FALSE WHERE "id" = $1;',
+      [taskID], function(queryError, result)
       {
         done();
         if(queryError)
