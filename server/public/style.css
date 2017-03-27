@@ -3,13 +3,42 @@
   font-weight: bold;
 }
 
+.true
+{
+  height: 30px;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+}
+
 .false
 {
   background-color: lightgrey;
   color: darkgrey;
+  height: 30px;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
 }
 
 #completedTasks
 {
   background-color: lime;
+}
+
+#buffer
+{
+  height: 30px;
+}
+
+button
+{
+  margin-left: 10px;
+}
+
+#test
+{
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
 }

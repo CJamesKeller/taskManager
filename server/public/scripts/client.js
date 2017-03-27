@@ -48,6 +48,8 @@ $(document).ready(function()
       });
   });
 
+  $("body").append("<div id='test'>Words</div>");
+
 //end of DocReady
 });
 
@@ -71,24 +73,26 @@ function getTasks()
             $("#tasksDiv").append("<tr class=" + task.status + " data-task=" + task.id + ">");
             var $el1 = $("#tasksDiv").children().last();
             $el1.append("<td>" + task.name + "</td>");
-            $el1.append("<td><button class='delete' data-task='" +
-                        task.id +
-                      "'>Delete</button></td>");
             $el1.append("<td><button class='done' data-task='" +
                         task.id +
                       "'>Done</button></td>");
+            $el1.append("<td><button class='delete' data-task='" +
+                        task.id +
+                      "'>Delete</button></td>");
+
           }
           else if (task.status === false)
           {
             $("#completedTasks").append("<tr class=" + task.status + " data-task=" + task.id + ">");
             var $el2 = $("#completedTasks").children().last();
             $el2.append("<td>" + task.name + "</td>");
-            $el2.append("<td><button class='delete' data-task='" +
-                        task.id +
-                      "'>Delete</button></td>");
             $el2.append("<td><button class='done' data-task='" +
                         task.id +
                       "'>Done</button></td>");
+            $el2.append("<td><button class='delete' data-task='" +
+                        task.id +
+                      "'>Delete</button></td>");
+
           }
         }
       }
