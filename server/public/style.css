@@ -1,6 +1,12 @@
-#tableHead
+
+body
 {
-  font-weight: bold;
+  margin-left: 30px;
+}
+
+#header
+{
+  color: steelblue;
 }
 
 .true
@@ -9,6 +15,7 @@
   border-color: black;
   border-style: solid;
   border-width: 2px;
+  background-color: aliceblue; 
 }
 
 .false
@@ -21,24 +28,29 @@
   border-width: 2px;
 }
 
-#completedTasks
-{
-  background-color: lime;
-}
-
-#buffer
+.buffer
 {
   height: 30px;
 }
 
-button
+table, th, td
 {
-  margin-left: 10px;
+  border: 2px solid black;
+  border-collapse: collapse;
 }
 
-#test
+th, td
 {
-  border-color: black;
-  border-style: solid;
-  border-width: 2px;
+  width: 65px;
+  padding: 5px;
+}
+
+td
+{
+  color: darkcyan;
+}
+
+.nameBox
+{
+  width: 200px;
 }
